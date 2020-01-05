@@ -8,7 +8,7 @@ A plugin that kicks players based on whether they are a member of a group
 4. Configure it 
 
 ## ConVars
-The plugin creates a `plugin.steamgrouprestrict.cfg` in the `cfg/sourcemod` folder when its loaded where you can configure these varibles.
+The plugin creates a `plugin.steamgrouprestrict.cfg` in the `cfg/sourcemod` folder when its loaded where you can configure these variables.
 
 ### sm_steamgrouprestrict_groupids (default: "")
 List of group ids separated by a comma.
