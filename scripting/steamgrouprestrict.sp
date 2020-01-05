@@ -1,5 +1,5 @@
 #include <sourcemod>
-#include "autoexecconfig"
+#include "include/autoexecconfig"
 #include "include/steamworks"
 
 #pragma semicolon 1
