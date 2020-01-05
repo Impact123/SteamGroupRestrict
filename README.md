@@ -14,7 +14,7 @@ The plugin creates a `plugin.steamgrouprestrict.cfg` in the `cfg/sourcemod` fold
 List of group ids separated by a comma.
 Spaces between the value and the comma are trimmed off so feel free to use them for better visibility.
 
-The expected input is the result of `(groupID64 % (1 << 32))`  
+The expected input is the result of `groupID64 % (1 << 32)`  
 You can get a group's groupID64 by visiting  
 `https://steamcommunity.com/groups/ADDYOURGROUPSNAMEHERE/memberslistxml/?xml=1`  
 To convert the groupID64 you can use the `python` console.
