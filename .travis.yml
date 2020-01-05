@@ -1,0 +1,43 @@
+language: c
+
+addons:
+    apt:
+        packages:
+            - lib32stdc++6
+            - zip
+            - unzip
+
+env:
+    matrix:
+        - SMBRANCH=1.9
+        - SMBRANCH=1.10
+        - SMBRANCH=1.11
+
+before_script:
+    - SMPACKAGE="http://sourcemod.net/latest.php?os=linux&version=${SMBRANCH}"
+    - wget "$SMPACKAGE" -O latest.tar.gz
+    - mkdir $SMBRANCH
+    - tar xfz latest.tar.gz -C $SMBRANCH
+    - export SMPATH=$(pwd)/$SMBRANCH/addons/sourcemod/scripting
+    - mkdir plugins
+
+script:
+    - $SMPATH/spcomp scripting/steamgrouprestrict.sp
+    - mv steamgrouprestrict*.smx plugins/
+    - zip -q -9 -r steamgrouprestrict_gameserver.zip plugins/ scripting/
+
+deploy:
+    - provider: releases
+      skip_cleanup: true
+      api_key:
+          secure: aluHVTVa3DatUISjPUUck1YNlOVqNiZI7F4Lk0DcTpGuSs38UtZYbxXXHibrq004LP/R1GvMxFZx0rkYDKJJyJw0HpoQlodsgm5T3g5OJAcHfrD8WcR0R5T5GBUBaTZ6copr5175TDhMcGTHTA66rFDmch7Sh1m86IVhwhlJbag=
+      file:
+          - steamgrouprestrict_gameserver.zip
+      on:
+          condition: "$SMBRANCH = 1.10"
+          tags: true
+          repo: SteamGroupRestrict
+          branches:
+              only:
+                  - master
+                  - development
