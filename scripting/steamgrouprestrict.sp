@@ -32,7 +32,7 @@ public void OnPluginStart()
 	AutoExecConfig_CreateConVar("sm_steamgrouprestrict_version", PLUGIN_VERSION, "Plugin version", FCVAR_PROTECTED|FCVAR_DONTRECORD);
 	
 	g_hGroupIds = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_groupids", "", "List of group ids separated by a comma. Use (groupd64 % 4294967296) to convert to expected input", FCVAR_PROTECTED);
-	g_hNotify   = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_notify", "1", "Whether or not admins should be notified about kicks", FCVAR_PROTECTED, true, 0.0, true, 1.0);
+	g_hNotify   = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_notify", "1", "Whether or not admins should be notified about kicks", FCVAR_NONE, true, 0.0, true, 1.0);
 	
 	AutoExecConfig_ExecuteFile();
 	AutoExecConfig_CleanFile();
