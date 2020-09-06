@@ -21,4 +21,7 @@ To convert the groupID64 you can use the `python` console.
 
 ### sm_steamgrouprestrict_notify (default: 1)
 Whether or not admins should be notified about kicks.  
- By default admins with the **BAN** flag are considered admins but you can [override this](https://wiki.alliedmods.net/Overriding_Command_Access_(SourceMod)) with `sm_steamgrouprestrict_admin`
+By default admins with the **BAN** flag are considered admins but you can [override this](https://wiki.alliedmods.net/Overriding_Command_Access_(SourceMod)) with `sm_steamgrouprestrict_admin`
+ 
+### sm_steamgrouprestrict_reason (default: You are a member of a restricted group)
+Kick reason displayed to client
