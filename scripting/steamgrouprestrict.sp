@@ -20,9 +20,11 @@ public Plugin myinfo =
 
 ConVar g_hGroupIds;
 ConVar g_hNotify;
+ConVar g_hKickReason;
 
 int g_iGroupIds[100];
 int g_iNumGroups;
+char g_sKickReason[256];
 
 
 public void OnPluginStart()
@@ -31,13 +33,15 @@ public void OnPluginStart()
 	
 	AutoExecConfig_CreateConVar("sm_steamgrouprestrict_version", PLUGIN_VERSION, "Plugin version", FCVAR_PROTECTED|FCVAR_DONTRECORD);
 	
-	g_hGroupIds = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_groupids", "", "List of group ids separated by a comma. Use (groupd64 % 4294967296) to convert to expected input", FCVAR_PROTECTED);
-	g_hNotify   = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_notify", "1", "Whether or not admins should be notified about kicks", FCVAR_NONE, true, 0.0, true, 1.0);
+	g_hGroupIds   = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_groupids", "", "List of group ids separated by a comma. Use (groupd64 % 4294967296) to convert to expected input", FCVAR_PROTECTED);
+	g_hNotify     = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_notify", "1", "Whether or not admins should be notified about kicks", FCVAR_NONE, true, 0.0, true, 1.0);
+	g_hKickReason = AutoExecConfig_CreateConVar("sm_steamgrouprestrict_reason", "You are a member of a restricted group", "Kick reason displayed to client");
 	
 	AutoExecConfig_ExecuteFile();
 	AutoExecConfig_CleanFile();
 	
 	g_hGroupIds.AddChangeHook(OnCvarChanged);
+	g_hKickReason.AddChangeHook(OnCvarChanged);
 }
 
 
@@ -47,11 +51,16 @@ public void OnCvarChanged(Handle cvar, const char[] oldValue, const char[] newVa
 	{
 		OnConfigsExecuted();
 	}
+	else if (cvar == g_hKickReason)
+	{
+		g_hKickReason.GetString(g_sKickReason, sizeof(g_sKickReason));
+	}
 }
 
 
 public void OnConfigsExecuted()
 {
+	g_hKickReason.GetString(g_sKickReason, sizeof(g_sKickReason));
 	RefreshGroupIds();
 	CheckAll();
 }
@@ -123,7 +132,7 @@ public void SteamWorks_OnClientGroupStatus(int accountId, int groupId, bool isMe
 				PrintNotifyMessageToAdmins(client, groupId);
 			}
 			
-			KickClient(client, "You are a member of a restricted group");
+			KickClient(client, g_sKickReason);
 		}
 	}
 }
