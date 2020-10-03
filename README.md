@@ -1,7 +1,7 @@
 # Steam Group Restrict
 A plugin that kicks players based on whether they are a member of a group
 
-![Build include](https://github.com/Impact123/AutoExecConfig/workflows/Build%20include/badge.svg)
+![Build plugin](https://github.com/Impact123/SteamGroupRestrict/workflows/Build%20plugin/badge.svg)
 
 
 ## Installation
