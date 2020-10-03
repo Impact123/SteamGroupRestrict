@@ -1,6 +1,9 @@
 # Steam Group Restrict
 A plugin that kicks players based on whether they are a member of a group
 
+![Build include](https://github.com/Impact123/AutoExecConfig/workflows/Build%20include/badge.svg)
+
+
 ## Installation
 1. Install [The SteamWorks extension](https://forums.alliedmods.net/showthread.php?t=229556)
 2. Put `steamgrouprestrict.smx` in the `sourcemod/plugins` folder
